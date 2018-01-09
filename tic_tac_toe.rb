@@ -61,11 +61,13 @@ game_grid = (1..9).to_a
 
 puts "You can select which quadrant to place your symbol by pressing one of the number keys with the corresponding quadrant\n\n"
 print_grid(game_grid)
-puts "\nPress any key when you are ready..."
+puts "\nPress the enter key when you are ready..."
 gets.chomp
 
 winner = false
+count = 0
 player_1_turn = true
+
 while(!winner)
   system "clear"
   if player_1_turn
@@ -84,6 +86,11 @@ while(!winner)
     gets.chomp
   else
     winner = current_player.check_winner(game_grid)
+    count += 1
+    if !winner && count == 9
+      puts "You guys tied!"
+      winner = true
+    end
     player_1_turn = !player_1_turn
   end
 end
